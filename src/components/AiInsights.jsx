@@ -12,7 +12,7 @@ function AiInsights({repodata,languages,contributors}) {
 
     
         try{
-           const response=await fetch("http://localhost:5000/api/generate",
+           const response=await fetch("https://github-analyzer-backend-o5e2.onrender.com/api/generate",
             {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
