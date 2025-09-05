@@ -46,6 +46,17 @@
  npm run dev
  # 5 Start the backend server
   node zerver.js
- 
-
+  ---
+   #search repository
+  ! [search](public/screenshot/search.png)
+  #AI Insights
+  ![AI Insights](public/screenshot/ai-insights.png)
+  #Repository data
+  ![Repositpry data](public/screenshot/repodata.png)
+  #Languages Chart
+  ![Languages Chart](public/screenshot/languages.png)
+  #Commit Chart
+  ![Commit Chart](public/screenshot/commits.png)
+  #Contributors
+  ![Contributors Chart](public/screenshot/contributors.png)
 
