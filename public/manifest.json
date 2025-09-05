@@ -1,0 +1,14 @@
+{
+    "name":"Github Repository Analyzer",
+    "short_name":"GH Analyzer",
+    "description":"AI-powered dashboard that analyzes any public Github repository. ",
+    "start_url":"/",
+    "scope":"/",
+    "display":"standalone",
+    "background_colour":"#f1f5f9",
+    "theme_colour":"0ea5e9",
+    "icons":[
+        {"src":"/icons/icon-192192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+        {"src":"/icons/5043929.png","sizes":"512x512","type":"image/png","purpose":"any"}
+    ]
+}
