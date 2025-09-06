@@ -71,7 +71,7 @@ localStorage.setItem("lastRepoData",JSON.stringify({
   };
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6'>
+    <div className='min-w-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6 overflow-x-hidden'>
       <h1 className='md:text-3xl text-2xl font-extrabold text-trasparent bg-clip-text bg-gradient-to-r from -blue-600 to-indigo-600 text-blue-600 mb-6'>
         Github Repository Analyzer
 </h1>
