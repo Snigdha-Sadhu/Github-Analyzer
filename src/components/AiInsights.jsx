@@ -39,9 +39,11 @@ function AiInsights({repodata,languages,contributors,darkmode}) {
        
         
            {insight && (
-            <p className='mt-4 
-            bg-gray-700
-            text-grey-100 whitespace-pre-line'>{insight}</p>
+            <p className={`mt-4  whitespace-pre-line p-4 rounded-md
+              ${darkmode 
+              ? " bg-gray-700 text-grey-100 "
+              :" bg-gray-100 text-grey-700 "}`
+           } >{insight}</p>
             )}    
     
       
