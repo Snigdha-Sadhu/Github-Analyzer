@@ -13,6 +13,7 @@ function App() {
   const[languages,setLanguages]=useState(null);
   const[contributors,setContributors]=useState(null);
   const[isOffline,setIsOffline]=useState(!navigator.onLine);
+  const[darkmode,setdarkmode]=useState(false);
   const[error,setError]=useState("");
   useEffect(()=>{
     const goOnline=()=>setIsOffline(false);
@@ -71,30 +72,34 @@ localStorage.setItem("lastRepoData",JSON.stringify({
   };
 
   return (
-    <div className='min-w-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6 overflow-x-hidden'>
-      <h1 className='md:text-3xl text-2xl font-extrabold text-trasparent bg-clip-text bg-gradient-to-r from -blue-600 to-indigo-600 text-blue-600 mb-6'>
-        Github Repository Analyzer
+    <div className={darkmode ? ' min-w-screen min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 p-6 overflow-x-hidden ': "bg-white text-black min-w-screen min-h-screen flex flex-col items-center justify-center overflow-x-hidden p-6 "}>
+      <div className='flex justify-center md:gap-2 gap-1 mt-10'>
+      
+      <h1 className='md:text-3xl text-xl font-extrabold text-trasparent bg-clip-text bg-gradient-to-r from -blue-600 to-indigo-600 text-blue-600 mb-6'>
+       🚀 Github Repository Analyzer
 </h1>
-<div className='flex md:flex-row flex-col gap-2 mb-4 '>
+<button onClick={()=>setdarkmode(!darkmode)} className={darkmode?'px-1 h-8  bg-lime-700 rounded-full bg-gradient-to-r from-yellow-100 via-yellow-200 to yellow-400  text-white shadow-lg ':"px-1 h-8 rounded-full  bg-gradient-to-br from-gray-900 to-gray-800 to yellow-400  text-white shadow-lg  "}>{darkmode ?"☀️":"🌙"}</button>
+</div>
+<div className='flex mt-2 md:flex-row flex-col gap-2 mb-4 '>
   <input type="text" placeholder='Github Username' value={username} onChange={(e)=>setUsername(e.target.value)}
-  className='border rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-blue-400'/>
+  className={darkmode?'border rounded-lg px-3 py-2 bg-gray-800  text-white focus:outline-none focus:ring-blue-400':'border rounded-lg px-3 py-2 text-black bg-white focus:outline-none focus:ring-blue-400'}/>
   <input type="text" placeholder='Repository Name' value={repo} onChange={(e)=>setRepo(e.target.value)}
-  className='border rounded-lg px-3 py-2  text-white focus:outline-none focus:ring-blue-400'/>
+  className={darkmode ? 'border rounded-lg px-3 py-2 bg-gray-800 text-white focus:outline-none focus:ring-blue-400': 'border rounded-lg px-3 py-2 bg-white text-black focus:outline-none focus:ring-blue-400'}/>
   
   <button onClick={fetchRepoData} className='bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition'>Analyze</button>
 
 </div>
 {/*Error*/}
 {repodata && (
-  <div className='bg-gray-700 text-gray-100 shadow-lg rounded-xl p-6 w-full max-w-md text-left'>
+  <div className={darkmode ? 'bg-gray-700 text-gray-100 shadow-lg rounded-xl p-6 w-full max-w-md text-left':"bg-zinc-100 text-zinc-700 shadow-lg rounded-xl p-6 w-full max-w-md text-left "}>
     <h2 className='text-xl font-semibold mb-2'>{repodata.full_name}</h2>
-    <p className='text-gray-100 mb-4'>{repodata.description}</p>
+    <p className={darkmode ? 'text-gray-100 mb-4':"text-gray-800 mb-4"}>{repodata.description}</p>
     <ul className='space-y-1'>
-      <li>Stars:{repodata.stargazers_count}</li>
-       <li>Forks:{repodata.forks_count}</li>
-        <li>Open Issues:{repodata.open_issues_count}</li>
-         <li>Wathers:{repodata.subscribers_count}</li>
-          <li>License:{repodata.license? repodata.license.name:"No license specified"}</li>
+      <li>⭐Stars:{repodata.stargazers_count}</li>
+       <li>🍴Forks:{repodata.forks_count}</li>
+        <li>🐞Open Issues:{repodata.open_issues_count}</li>
+         <li>👀Wathers:{repodata.subscribers_count}</li>
+          <li>💻License:{repodata.license? repodata.license.name:"No license specified"}</li>
 
     </ul>
     <a href={repodata.html_url}
@@ -110,13 +115,13 @@ localStorage.setItem("lastRepoData",JSON.stringify({
 {error && <p className='text-red-500'>{error}</p>}
 {/*Ai Insights Component */}
 {repodata && (
-<AiInsights repodata={repodata} languages={languages} contributors={contributors}/>
+<AiInsights darkmode={darkmode} repodata={repodata} languages={languages} contributors={contributors}/>
 )}
 {repodata && (
   <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-6'>
-<LanguagesChart languages={languages}/>
-<CommitsChart fullName={repodata.full_name}/>
-<ContributorsChart fullName={repodata.full_name}/>
+<LanguagesChart languages={languages}darkmode={darkmode}/>
+<CommitsChart fullName={repodata.full_name}darkmode={darkmode}/>
+<ContributorsChart fullName={repodata.full_name}darkmode={darkmode}/>
 </div>
 )}
     </div>
