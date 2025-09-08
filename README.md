@@ -1,4 +1,10 @@
 #Github Repository Analyzer
+
+**Switch Between light and dark themes for better readability**
+
+------
+
+
  A web app that analyzes any public Github repository and visualizes:
  - **Commit activity** (last 12 weeks)
  - **Top contributors**
@@ -8,7 +14,7 @@
  ---
  ## Feathers:
  -Commit Activity (12 weeks) line charts
- -Top Contributors bar chart
+ -Top Contributors bar chart with theier Github Avatars and direct profile links
  -Language Used dobut/pie chart
  -Clean dark UI,responsive layout
  -Error handling (invalid repo,network issue)
