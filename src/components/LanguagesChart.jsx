@@ -2,7 +2,7 @@ import React from 'react'
 import { PieChart,Pie,Cell,Tooltip,Legend } from 'recharts'
 const colors=["#0088FE","#00C49F","#FFBB28","#FF8042","#8884d8","#82ca9d"];
 
-function LanguagesChart({languages}) {
+function LanguagesChart({languages,darkmode}) {
     if(!languages || Object.keys(languages).length===0){
         return <p>No language data  available.</p>;
     }
@@ -11,7 +11,7 @@ function LanguagesChart({languages}) {
         value,
     }));
   return (
-    <div className='bg-gray-700 shadow-lg rounded-2xl p-4 mt-6'>
+    <div className={darkmode?'bg-gray-700 shadow-lg rounded-2xl p-4 mt-6':"bg-gray-100 shadow-lg rounded-2xl p-4 mt-6"}>
         <h2 className='text-lg text-gray-100 font-semibold mb-3'>
            Language Composition   
         </h2>

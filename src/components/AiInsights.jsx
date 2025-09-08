@@ -2,7 +2,7 @@
 
 
 
-function AiInsights({repodata,languages,contributors}) {
+function AiInsights({repodata,languages,contributors,darkmode}) {
     
     const[insight,setInsight]=useState("");
     const[loading,setLoading]=useState(false);
@@ -33,7 +33,7 @@ function AiInsights({repodata,languages,contributors}) {
     };
 
   return (
-    <div className=' bg-gray-700 text-gray-100 p-4 rounded-lg border mt-6 '>
+    <div className={darkmode ? ' bg-gray-700 text-gray-100 p-4 rounded-lg border mt-6 ':"text-gray-700 bg-gray-100 p-4 rounded-lg border mt-6 "}>
         <h2 className='text-lg font-semibold mb-2'>AI insights</h2>
         <button onClick={generateInsights} disabled={loading} className='bg-green-500 text-gray-100 px-4 py-2 rounded hover:bg-green-700'>{loading ? "Generating..." : "Generate Ai Insights"}</button>
        

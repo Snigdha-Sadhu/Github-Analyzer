@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,Legend } from 'recharts'
-function CommitsChart({fullName}) {
+function CommitsChart({fullName,darkmode}) {
     const [commits,setCommits]=useState([]);
     useEffect(()=>{
         if(!fullName) return;
@@ -23,18 +23,18 @@ function CommitsChart({fullName}) {
     },[fullName]);
     if(commits.length===0)return <p>No Commit activity data.</p>
   return (
-    <div className='bg-gray-700 text-white shadow-lg rounded-2xl p-4 mt-6'>
+    <div className={darkmode ?'bg-gray-700 text-white shadow-lg rounded-2xl p-4 mt-6':"bg-gray-100 text-gray-700 shadow-lg rounded-2xl p-4 mt-6"}>
         <h2 className='text-lg font-semibold mb-3'>
            Commit Activity (Last 12 Weeks)
         </h2>
         <LineChart width={500} height={300} data={commits}>
             <CartesianGrid strokeDasharray="3 3" stroke="#444"/>
-            <XAxis dataKey="week" stroke="#ccc"/>
-            <YAxis stroke='#ccc'/>
-            <Tooltip contentStyle={{backgroundColor:'#1f2937',borderRadius:'0.5rem',border:'none'}}
-            labelStyle={{color:'#fff'}}/>
+            <XAxis dataKey="week" stroke={darkmode? '#ccc':"#333"}/>
+            <YAxis stroke={darkmode? '#ccc':"#333"}/>
+            <Tooltip contentStyle={{backgroundColor:darkmode?'#1f2937':"#fff",borderRadius:'0.5rem',border:'none'}}
+            labelStyle={{color:darkmode ?  '#fff': "#000"}}/>
             <Legend/>
-            <Line type="monotone" dataKey="commits" stroke="#4ade80" strokeWidth={2}/>    
+            <Line type="monotone" dataKey="commits" stroke={darkmode? '#ccc':"#1d4ed8"}strokeWidth={2}/>    
         </LineChart>
       
     </div>

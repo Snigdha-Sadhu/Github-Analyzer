@@ -5,7 +5,7 @@ import { Chart as ChartJS,CategoryScale,LinearScale,BarElement,Title,Tooltip,Leg
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend);
-function ContributorsChart({fullName}) {
+function ContributorsChart({fullName,darkmode}) {
     const[contributors,setContributors]=useState([]);
     useEffect(()=>{
     const fetchContributors=async ()=>{
@@ -42,8 +42,8 @@ const data={
         {
             label:"Commits",
             data:topcontributors.map((c)=>c.contributions),
-            backgroundColor:"#3b82f6",
-            borderColor:'#1d4ed8',
+            backgroundColor:darkmode ? "#4ade80":"#3b82f6",
+            borderColor:darkmode ? "#22c55e":'#1d4ed8',
             borderWidth:1,
         },
     ],
@@ -54,12 +54,12 @@ const options={
     plugins:{
         legend:{position:"top",
             lebels:{
-                color:'#f9fafb'
+                color:darkmode ?'#f9fafb':"#333",
             },
         },
         
         title:{display:true,text:"Top Contributors",
-            color:'#f9fafb' ,font:{
+            color:darkmode ?'#f9fafb' :"#333",font:{
            size:16,
            weight:"bold",
             }
@@ -70,30 +70,38 @@ const options={
             
            
             ticks:{
-                color:"#e5e7eb",
+                color:darkmode ?"#e5e7eb":"#333",
                
             },
             grid:{
-                color:"rgba(255,255,255,0.2)"
+                color:darkmode ?"rgba(255,255,255,0.2)":"rgba(0,0,0,0.2)"
             },
         },
         x:{
             ticks:{
-                color:'#e5e7eb',
-                 maxRotation:60,
+                color:darkmode?'#e5e7eb':"#333",
+                 maxRotation:90,
                 minRotation:45
             },
             grid:{
-                color:'rgba(255,255,255,0.2)'
+                color:darkmode ?'rgba(255,255,255,0.2)':'rgba(0,0,0,0.2)'
             },
         },
        
     },
 };
   return (
-    <div className=' bg-gray-800 shadow-md rounded-lg p-4 mt-6  overflow-x-auto'>
-        <div className={`min-w-[${contributors.length*80}px]`}></div>
+    <div className={darkmode?' bg-gray-800 shadow-md rounded-lg p-4 mt-6  overflow-x-auto h-[400px] w-full':"text-gray-800  bg-gray-100 shadow-md rounded-lg p-4 mt-6  overflow-x-auto h-[300px] w-full mb-20"}>
+        
         <Bar data={data} options={options}/>
+        <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-6'>
+            {contributors.slice(0,6).map((contributor)=>(
+                <a key={contributor.id}  href={contributor.html_url} target="blank"rel="noopener noreferrer" className='flex flex-cool items-center'>
+                    <img src={contributor.avatar_url} alt={contributor.login} className='w-16 h-16 rounded-full border-2 border-gray-300 dark:border-gray-600'/>
+                    <span className='mt-2 text-sm'>{contributor.login}</span>
+                </a>
+            ))}
+        </div>
       
     </div>
   );
