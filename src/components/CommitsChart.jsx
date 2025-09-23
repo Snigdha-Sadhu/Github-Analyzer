@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,Legend } from 'recharts'
+import { LineChart,Line,XAxis,YAxis,CartesianGrid,Tooltip,Legend, ResponsiveContainer } from 'recharts'
 function CommitsChart({fullName,darkmode}) {
     const [commits,setCommits]=useState([]);
     useEffect(()=>{
@@ -27,15 +27,17 @@ function CommitsChart({fullName,darkmode}) {
         <h2 className='text-lg font-semibold mb-3'>
            Commit Activity (Last 12 Weeks)
         </h2>
-        <LineChart width={500} height={300} data={commits}>
+        <ResponsiveContainer width="100%" height="85%">
+        <LineChart data={commits}>
             <CartesianGrid strokeDasharray="3 3" stroke="#444"/>
             <XAxis dataKey="week" stroke={darkmode? '#ccc':"#333"}/>
             <YAxis stroke={darkmode? '#ccc':"#333"}/>
             <Tooltip contentStyle={{backgroundColor:darkmode?'#1f2937':"#fff",borderRadius:'0.5rem',border:'none'}}
             labelStyle={{color:darkmode ?  '#fff': "#000"}}/>
             <Legend/>
-            <Line type="monotone" dataKey="commits" stroke={darkmode? '#ccc':"#1d4ed8"}strokeWidth={2}/>    
+            <Line type="monotone" dataKey="commits" stroke={darkmode? '#ccc':"#1d4ed8"}strokeWidth={2} dot={{r:4}} activeDot={{r:6}}/>    
         </LineChart>
+        </ResponsiveContainer>
       
     </div>
   )

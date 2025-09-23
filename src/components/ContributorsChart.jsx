@@ -37,7 +37,7 @@ console.log(contributors);
 if(!contributors.length) return <p>No Contributors data available.</p>;
 const topcontributors=[...contributors].sort((a,b)=>b.contributions-a.contributions).slice(0,10);
 const data={
-    labels:contributors.map((c)=>c.login),
+    labels:topcontributors.map((c)=>c.login),
     datasets:[
         {
             label:"Commits",
@@ -94,11 +94,11 @@ const options={
     <div className={darkmode?' bg-gray-800 shadow-md rounded-lg p-4 mt-6  overflow-x-auto h-[400px] w-full':"text-gray-800  bg-gray-100 shadow-md rounded-lg p-4 mt-6  overflow-x-auto h-[300px] w-full mb-20"}>
         
         <Bar data={data} options={options}/>
-        <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4 mt-6'>
-            {contributors.slice(0,6).map((contributor)=>(
-                <a key={contributor.id}  href={contributor.html_url} target="blank"rel="noopener noreferrer" className='flex flex-cool items-center'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-6 mt-6'>
+            {topcontributors.map((contributor)=>(
+                <a key={contributor.id}  href={contributor.html_url} target="blank"rel="noopener noreferrer" className='flex flex-col items-center text-center'>
                     <img src={contributor.avatar_url} alt={contributor.login} className='w-16 h-16 rounded-full border-2 border-gray-300 dark:border-gray-600'/>
-                    <span className='mt-2 text-sm'>{contributor.login}</span>
+                    <span className='mt-2 text-sm truncate w-20'>{contributor.login}</span>
                 </a>
             ))}
         </div>
